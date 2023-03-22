@@ -5,7 +5,7 @@ var fs = require('fs');
 // Require minimist module (make sure you install this one via npm).
 var minimist = require('minimist');
 // Use minimist to process one argument `--port=` on the command line after `node server.js`.
-const args = minimist(process.argv.slice(2));
+let args = minimist(process.argv.slice(2));
 
 const port = args.port || 3000;
 // Define a const `port` using the argument from the command line. 
@@ -41,9 +41,9 @@ const server = http.createServer((req, res) => {
     res.end(data);
   });
 });
-server.listen(3000, () => {
-  console.log('Server running on port 3000');
-});
+server.listen(port);
+ console.log('Server running on port '+ port );
+
 
 
 
