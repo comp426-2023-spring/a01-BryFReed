@@ -28,20 +28,21 @@ const port = args.port || 3000;
 // 1. status code 200, 
 // 2. set a header with content type `text/html`, and 
 // 3. end with the data that you are reading in from ./public/index.html.
+
 const server = http.createServer((req, res) => {
+ res.statusCode = 200;
+
+ res.setHeader('Content-Type', 'text/html');
   fs.readFile('./public/index.html', (err, data) => {
     if (err) {
-      res.writeHead(500, { 'Content-Type': 'text/plain' });
-      res.end('Internal Server Error');
-    } else {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(data);
+      console.error(err);
+      return;
     }
+    res.end(data);
   });
 });
-
 server.listen(3000, () => {
-  console.log('Server listening on port 3000');
+  console.log('Server running on port 3000');
 });
 
 
